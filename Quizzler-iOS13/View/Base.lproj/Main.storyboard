@@ -59,14 +59,33 @@
                                     <action selector="userAnswerSubmitted:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4KP-hb-1Nt"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vyz-yC-Kf9">
+                                <rect key="frame" x="180" y="150" width="54.5" height="52"/>
+                                <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="40"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="score" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cns-Se-LLY">
+                                <rect key="frame" x="155.5" y="89" width="103.5" height="49"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="42"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" red="0.34853470330000003" green="0.43909543750000002" blue="0.96475511790000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstItem="cns-Se-LLY" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="45" id="DYJ-jZ-Uen"/>
+                            <constraint firstItem="cns-Se-LLY" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="FpO-2b-dJL"/>
+                            <constraint firstItem="Vyz-yC-Kf9" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="UuK-Xx-oE0"/>
+                            <constraint firstItem="Vyz-yC-Kf9" firstAttribute="top" secondItem="cns-Se-LLY" secondAttribute="bottom" constant="12" id="ZTu-MN-xrl"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="falseButton" destination="tbn-vQ-GyC" id="Vxb-tx-xjT"/>
                         <outlet property="progressBarView" destination="TXm-qh-7Xg" id="jt3-8f-T3p"/>
                         <outlet property="questionTextView" destination="rSI-li-mhO" id="9WR-U6-Z01"/>
+                        <outlet property="scoreView" destination="Vyz-yC-Kf9" id="jUR-H2-kyh"/>
                         <outlet property="trueButton" destination="oVw-Hl-IRe" id="dbG-Cr-hJQ"/>
                     </connections>
                 </viewController>
