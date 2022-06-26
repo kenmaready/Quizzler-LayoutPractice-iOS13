@@ -7,11 +7,7 @@
 //
 
 import UIKit
-
-struct QuizQuestion {
-    let q: String
-    let a: Bool
-}
+import AVFoundation
 
 class ViewController: UIViewController {
     
@@ -20,6 +16,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var trueButton: UIButton!
     @IBOutlet weak var falseButton: UIButton!
     
+    var player: AVAudioPlayer?
+    var timer: Timer?
     let questions = [
         QuizQuestion(q:"A slug's blood is green.", a:true),
         QuizQuestion(q:"Approximately one quarter of human bones are in the feet.", a:true),
@@ -43,11 +41,16 @@ class ViewController: UIViewController {
     }
 
     @IBAction func userAnswerSubmitted(_ sender: UIButton) {
+
         let userAnswer = sender.currentTitle == "True"
         if userAnswer == questions[currentQuizItem].a {
+            playSound(name: "correct-sound")
+            changeButtonColor(sender: sender, correct: true)
             score += 1
             print("correct. current score is: \(score)")
         } else {
+            playSound(name: "incorrect-sound")
+            changeButtonColor(sender: sender, correct: false)
             print("incorrect. current score remains: \(score)")
         }
         currentQuizItem += 1;
@@ -57,6 +60,21 @@ class ViewController: UIViewController {
     
     func loadCurrentQuestion() {
         questionTextView.text = questions[currentQuizItem].q
+    }
+    
+    func playSound(name: String) {
+        let url = Bundle.main.url(forResource: name, withExtension: "mp3")
+        player = try! AVAudioPlayer(contentsOf: url!)
+        player?.play()
+    }
+    
+    func changeButtonColor(sender: UIButton, correct: Bool) {
+        if correct { sender.backgroundColor = UIColor.systemGreen }
+        else { sender.backgroundColor = UIColor.systemRed }
+        timer = Timer.scheduledTimer(withTimeInterval: 2, repeats: false) {_ in
+            sender.backgroundColor = UIColor.clear
+            self.timer?.invalidate()
+            }
     }
     
 }
