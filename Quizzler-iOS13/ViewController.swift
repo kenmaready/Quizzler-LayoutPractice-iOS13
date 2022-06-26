@@ -38,6 +38,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         loadCurrentQuestion()
+        setProgressBar()
     }
 
     @IBAction func userAnswerSubmitted(_ sender: UIButton) {
@@ -54,12 +55,19 @@ class ViewController: UIViewController {
             print("incorrect. current score remains: \(score)")
         }
         currentQuizItem += 1;
-        if currentQuizItem >= questions.count { currentQuizItem = 0 }
+        if currentQuizItem >= questions.count {
+            currentQuizItem = 0;
+        }
         loadCurrentQuestion()
+        setProgressBar()
     }
     
     func loadCurrentQuestion() {
         questionTextView.text = questions[currentQuizItem].q
+    }
+    
+    func setProgressBar() {
+        progressBarView.progress = Float(currentQuizItem + 1)/Float(questions.count)
     }
     
     func playSound(name: String) {
@@ -71,7 +79,7 @@ class ViewController: UIViewController {
     func changeButtonColor(sender: UIButton, correct: Bool) {
         if correct { sender.backgroundColor = UIColor.systemGreen }
         else { sender.backgroundColor = UIColor.systemRed }
-        timer = Timer.scheduledTimer(withTimeInterval: 2, repeats: false) {_ in
+        timer = Timer.scheduledTimer(withTimeInterval: 0.6, repeats: false) {_ in
             sender.backgroundColor = UIColor.clear
             self.timer?.invalidate()
             }
