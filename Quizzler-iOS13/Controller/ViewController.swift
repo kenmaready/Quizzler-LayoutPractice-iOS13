@@ -29,14 +29,13 @@ class ViewController: UIViewController {
     @IBAction func userAnswerSubmitted(_ sender: UIButton) {
 
         let userAnswer = sender.currentTitle == "True"
-        if quiz.isCorrect(userAnswer) {
+        if quiz.submitAnswer(userAnswer) {
             playSound(name: "correct-sound")
             changeButtonColor(sender: sender, correct: true)
         } else {
             playSound(name: "incorrect-sound")
             changeButtonColor(sender: sender, correct: false)
         }
-        quiz.advance()
         updateUI()
     }
     

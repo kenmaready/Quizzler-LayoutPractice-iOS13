@@ -41,11 +41,13 @@ struct QuizManager {
     }
     
     // other methods
-    mutating func isCorrect(_ userAnswer: Bool) -> Bool {
+    mutating func submitAnswer(_ userAnswer: Bool) -> Bool {
         if userAnswer == questions[currentQuizItem].a {
+            advance()
             score += 1
             return true
         }
+        advance()
         return false
     }
     
