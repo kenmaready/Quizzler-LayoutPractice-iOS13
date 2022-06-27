@@ -10,5 +10,6 @@ import Foundation
 
 struct QuizQuestion {
     let q: String
-    let a: Bool
+    let a: [String]
+    let correctAnswer: Int
 }

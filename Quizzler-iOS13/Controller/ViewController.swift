@@ -14,8 +14,10 @@ class ViewController: UIViewController {
     @IBOutlet weak var scoreView: UILabel!
     @IBOutlet weak var questionTextView: UILabel!
     @IBOutlet weak var progressBarView: UIProgressView!
-    @IBOutlet weak var trueButton: UIButton!
-    @IBOutlet weak var falseButton: UIButton!
+    @IBOutlet weak var answerTwoButton: UIButton!
+    @IBOutlet weak var answerOneButton: UIButton!
+    @IBOutlet weak var answerThreeButton: UIButton!
+    var answerButtons: [UIButton]?
     
     var player: AVAudioPlayer?
     var timer: Timer?
@@ -23,12 +25,13 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        answerButtons = [answerOneButton, answerTwoButton, answerThreeButton]
         updateUI()
     }
 
     @IBAction func userAnswerSubmitted(_ sender: UIButton) {
 
-        let userAnswer = sender.currentTitle == "True"
+        let userAnswer = sender.tag
         if quiz.submitAnswer(userAnswer) {
             playSound(name: "correct-sound")
             changeButtonColor(sender: sender, correct: true)
@@ -42,6 +45,7 @@ class ViewController: UIViewController {
     func updateUI() {
         displayScore()
         loadCurrentQuestion()
+        loadCurrentAnswers()
         updateProgressBar()
     }
     
@@ -53,6 +57,13 @@ class ViewController: UIViewController {
     
     func loadCurrentQuestion() {
         questionTextView.text = quiz.currentQuestion()
+    }
+    
+    func loadCurrentAnswers() {
+        let answers = quiz.currentAnswerOptions()
+        for i in 0...2 {
+            answerButtons?[i].setTitle(answers[i], for: .normal)
+        }
     }
     
     func updateProgressBar() {
